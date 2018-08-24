@@ -1,0 +1,45 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<dom-module id="task-list">
+    <template>
+        <style>
+            .completadas{
+                display: block;
+            }
+            .incompletas{
+                display: block;
+            }
+        </style>
+        <template is="dom-repeat" items="{{tasks}}" as="task" filter="{{_completedTask(filter)}}">
+        </template>
+    </template>
+    <script>
+        class TaskList extends Polymer.Element{
+            static get properties(){
+                return{
+                    tasks: {
+                        type: Array,
+                        value: []
+                    },
+                    filter: {
+                        type: String
+                    }
+                }
+            }
+            static get is(){
+                return 'task-list'
+            }
+
+            _completedTask(filter){
+                if(!filter){
+                    return null
+                }
+
+                return function(task){
+                    return task.title.indexOf(filter) > -1;
+                }
+            }
+        }
+        customElements.define(TaskList.is,TaskList)
+    </script>
+</dom-module>
