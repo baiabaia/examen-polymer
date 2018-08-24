@@ -8,7 +8,7 @@
         </style>
         <label for="add-task">Agrega una nueva Tarea</label>
         <br>
-        <input type="text" name="Task" id="taskButton">
+        <input type="text" id="taskName">
         <br>
         <button on-click="_clickHandler">Agregar</button>
     </template>
@@ -28,6 +28,7 @@
             }
 
             _clickHandler (event) {
+                console.log(event)
                 const addedTask = new CustomEvent('added-task',{})
                 this.dispatchEvent(addedTask)
             }
